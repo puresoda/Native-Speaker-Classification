@@ -1,0 +1,9 @@
+---------------------------------------------------------------------
+TODO
+---------------------------------------------------------------------
+Figure out which features to use for inputs to the RNN
+Add more features from Voicebox or other software
+Figure out the meaning of extracted feature data
+Clean up feature data
+Start on KNN classification for baseline
+
