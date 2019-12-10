@@ -16,7 +16,7 @@
 %   MFCC: Matrix storing progression of all 13 MFCC values throughout time
 
 function MFCC = extractMFCC(window_type, window_size, overlap, voiced_extract)
-    CUTOFF = 1103;
+    CUTOFF = 2000;
     files = dir('*.wav');
     
     MFCC = zeros(CUTOFF, 13, length(files));
@@ -53,5 +53,17 @@ function MFCC = extractMFCC(window_type, window_size, overlap, voiced_extract)
         end
         
         MFCC(:,:,i) = vertcat(temp,zeros(CUTOFF - length(temp), 13));
+    end
+    
+    for i=1:CUTOFF
+        temp = squeeze(MFCC(i,:,:)).';
+        var_vec = var(temp);
+        mean_vec = mean(temp);
+
+        for j=1:13
+            temp(:,j) = (temp(:,j) - mean_vec(j)) / var_vec(j);
+        end
+
+        MFCC(i,:,:) = temp.';
     end
 end
